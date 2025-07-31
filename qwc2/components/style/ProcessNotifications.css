@@ -1,0 +1,54 @@
+div.process-notifications {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 20em;
+    z-index: 1000;
+}
+
+div.process-notification {
+    padding: 0 0.25em;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.75);
+}
+
+div.process-notification-pending {
+    color: white;
+    background-color: #8886d4;
+}
+
+div.process-notification-success {
+    color: white;
+    background-color: #09ac00;
+}
+
+div.process-notification-failure {
+    color: white;
+    background-color: #ff0000;
+}
+
+div.process-notification-head {
+    display: flex;
+    align-items: center;
+    height: 2em;
+}
+
+div.process-notification-head > span.icon:first-child {
+    font-size: 125%;
+    margin-right: 0.25em;
+}
+
+div.process-notification-head > div.spinner {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.25em;
+}
+
+span.process-notification-label {
+    flex: 1 1 auto;
+}
+
+div.process-notification-detail {
+    font-style: italic;
+    font-size: 90%;
+    padding: 0.25em;
+}

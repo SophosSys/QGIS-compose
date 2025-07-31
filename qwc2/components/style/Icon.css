@@ -1,0 +1,27 @@
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;
+}
+
+img.icon {
+    vertical-align: top;
+}
+
+span.icon_large:before {
+    font-size: 150%;
+}
+
+span.icon_xlarge:before {
+    font-size: 175%;
+}
+
+.icon_clickable {
+    cursor: pointer;
+}
+
+.icon_disabled {
+    cursor: default;
+    color: var(--text-color-disabled);
+}

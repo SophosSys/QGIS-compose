@@ -1,0 +1,72 @@
+#BottomBar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3em;
+    z-index: 100;
+    color: var(--panel-text-color);
+    background-color: var(--panel-bg-color);
+    box-shadow: 0 -2px 4px rgba(136, 136, 136, 0.5);
+    backdrop-filter: blur(3px);
+    font-size: 75%;
+    display: flex;
+    align-items: center;
+}
+
+#BottomBar > * {
+    margin: 0 0.5em;
+}
+
+#BottomBar div.bottombar-scalebar-container {
+    min-width: 125px;
+}
+
+#BottomBar div.bottombar-scalebar {
+    display: inline-block;
+    color: var(--panel-text-color);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(3px);
+    border-radius: 5px;
+    padding: 0.5em;
+}
+
+#BottomBar div.bottombar-scalebar-inner {
+    border-color: var(--panel-text-color);
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+}
+
+#BottomBar input.bottombar-mousepos {
+    width: 20ch;
+    text-align: center;
+}
+
+#BottomBar div.bottombar-scale-combo {
+    position: relative;
+    width: 10em;
+}
+
+#BottomBar span.bottombar-scale-combo-prefix {
+    text-align: right;
+    width: 2em;
+    color: var(--text-color);
+}
+
+#BottomBar div.bottombar-scale-combo > input {
+    position: absolute;
+    top: 0;
+    left: 2em;
+    width: 6em;
+}
+
+#BottomBar span.bottombar-spacer {
+    flex: 1 1 auto;
+}
+
+#BottomBar span.bottombar-links > a:not(:first-child) {
+    border-left: 1px solid var(--panel-text-color);
+    margin-left: 0.5em;
+    padding-left: 0.5em;
+}

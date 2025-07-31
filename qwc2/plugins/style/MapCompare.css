@@ -1,0 +1,29 @@
+#MapCompare {
+    touch-action: none;
+    position: absolute;
+    background-color: var(--map-button-bg-color);
+    width: 0.25em;
+    margin-left: -0.125em;
+    top: 0;
+    bottom: 0;
+    cursor: ew-resize;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#MapCompare div.map-compare-handle {
+    height: 3em;
+    width: 3em;
+    margin-left: -1.375em;
+    background-color: var(--map-button-bg-color);
+    display: flex;
+    align-items: center;
+    border-radius: 1.5em;
+}
+
+#MapCompare span.map-compare-handle-icon {
+    flex: 0 0 1.5em;
+    color: var(--map-button-text-color);
+    text-align: center;
+}

@@ -1,0 +1,14 @@
+div.FileSelector {
+    display: inline-flex;
+    position: relative;
+    cursor: pointer;
+    overflow-x: hidden;
+}
+
+div.FileSelector > input[type=text] {
+    flex: 1 1 auto;
+}
+
+div.FileSelector > input[type=file] {
+    display: none;
+}

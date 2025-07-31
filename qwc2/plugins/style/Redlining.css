@@ -1,0 +1,57 @@
+div.redlining-controlsbar {
+    display: flex;
+    margin: 0.25em 0;
+}
+
+div.redlining-groupcontrol {
+    flex: 0 0 auto;
+    margin: 0 0.125em;
+}
+
+div.redlining-groupcontrol > div:first-child {
+    font-size: 85%;
+    text-align: center;
+}
+
+div.redlining-export-menu-entry {
+    font-size: 90%;
+}
+
+div.redlining-control {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.125em;
+}
+
+div.redlining-control-fill {
+    flex: 1 1 auto;
+}
+
+div.redlining-control-fill > div.controlgroup {
+    flex: 1 1 auto;
+}
+
+span.redlining-control-icon {
+    margin-right: 0.125em;
+}
+
+div.redlining-marker-combo-entry {
+    display: flex;
+    align-items: center;
+    height: 16px;
+    width: 16px;
+}
+
+div.redlining-marker-combo-entry img {
+    /* Marker images are white, invert them to black */
+    filter: invert(1);
+    height: 100%;
+}
+
+div.redlining-message {
+    font-size: 90%;
+    text-align: center;
+    font-style: italic;
+}

@@ -1,0 +1,79 @@
+div.number-input {
+    border: 1px solid var(--border-color);
+    position: relative;
+    display: flex;
+    height: 2em;
+    background-color: var(--input-bg-color);
+    align-items: center;
+}
+
+div.number-input-invalid {
+    background-color: #FFAAAA;
+}
+
+div.number-input > input {
+    min-width: 0;
+    width: 0;
+    flex: 1 1 auto;
+    border: 0!important;
+    height: calc(2em - 2px)!important;
+    background-color: transparent!important;
+    text-align: right;
+}
+
+div.number-input-disabled > span.icon {
+    color: var(--text-color-disabled);
+    cursor: default;
+}
+
+div.number-input:not(.number-input-disabled) > span.icon:hover {
+    background-color: var(--button-bg-color-hover);
+}
+
+/** Normal **/
+div.number-input-normal > input {
+    padding-right: 1.5em!important;
+}
+
+div.number-input > span.icon-chevron-up,
+div.number-input > span.icon-chevron-down {
+    position: absolute;
+    right: 0;
+    width: 1.5em;
+    height: 1em;
+    user-select: none;
+}
+
+div.number-input > span.icon-chevron-up {
+    top: calc(50% - 1em);
+}
+
+div.number-input > span.icon-chevron-down {
+    bottom: calc(50% - 1em);
+}
+
+/** Mobile **/
+div.number-input-mobile > input {
+    padding: 0 2em;
+    text-align: center;
+}
+
+div.number-input > span.icon-plus,
+div.number-input > span.icon-minus {
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    width: 2em;
+    background-color: var(--button-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    user-select: none;
+}
+
+div.number-input > span.icon-plus {
+    right: 1px;
+}
+
+div.number-input > span.icon-minus {
+    left: 1px;
+}

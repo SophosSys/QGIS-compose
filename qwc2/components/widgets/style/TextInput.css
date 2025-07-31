@@ -1,0 +1,108 @@
+div.text-input-wrapper {
+    position: relative;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    min-height: 2em;
+    display: flex;
+}
+
+div.text-input-wrapper-focused {
+    outline: var(--focus-outline);
+}
+
+textarea.text-input-form-el {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    width: 0;
+    left: 0;
+    bottom: 0;
+    height: 0;
+}
+
+pre.text-input {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0.25em;
+    overflow: auto;
+    cursor: text;
+    text-align: left;
+    height: 100%;
+    min-height: calc(2em - 2px);
+    white-space: nowrap;
+    outline: none;
+    width: 0;
+    flex: 1 1 auto;
+}
+
+
+text-input-wrapper-multiline > pre.text-input {
+    white-space: pre-wrap;
+}
+
+pre.text-input[contenteditable="true"] a {
+    cursor: text;
+    text-decoration: none;
+}
+
+pre.text-input-disabled {
+    background-color: var(--input-bg-color-disabled);
+}
+
+pre.text-input-invalid {
+    background-color: #FFAAAA;
+}
+
+pre.text-input-readonly {
+    color: var(--text-color-disabled);
+}
+
+div.text-input-placeholder {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+    padding: 0.25em;
+    color: var(--text-color-disabled);
+    pointer-events: none;
+    border: 1px solid transparent;
+    white-space: pre-wrap;
+    overflow: hidden;
+}
+
+div.text-input-resize-handle {
+    touch-action: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid var(--border-color);
+    border-left: 10px solid transparent;
+    z-index: 1;
+    cursor: ns-resize;
+}
+
+div.text-input-clear-icon {
+    position: absolute;
+    right: 0.25em;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+}
+
+span.text-input-link-tooltip {
+    border: 1px solid var(--tooltip-border-color);
+    background-color: var(--tooltip-bg-color);
+    color: var(--tooltip-text-color);
+    font-size: 75%;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    pointer-events: none;
+}

@@ -1,0 +1,12 @@
+div.navbar {
+    display: inline-flex;
+    margin-right: 1em;
+}
+
+div.navbar > select {
+    margin-left: 0.25em;
+}
+
+div.navbar > span.navbar-dots {
+    padding: 0 0.25em;
+}

@@ -1,0 +1,105 @@
+#MapFilter div.map-filter-entry {
+    margin: 0.25em;
+    border: 1px solid var(--border-color);
+}
+
+#MapFilter div.map-filter-entry-titlebar {
+    padding: 0.25em;
+    background-color: var(--titlebar-bg-color);
+    color: var(--titlebar-text-color);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    height: 2em;
+}
+
+#MapFilter div.map-filter-entry-titlebar > .map-filter-entry-title {
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#MapFilter div.map-filter-entry-titlebar > div.ToggleSwitch {
+    flex: 0 0 6em;
+    height: 1.5em;
+}
+
+#MapFilter div.map-filter-entry-body {
+    padding: 0.25em;
+}
+
+#MapFilter div.map-filter-entry-body > div:not(:last-child) {
+    margin-bottom: 0.25em;
+}
+
+#MapFilter div.map-filter-invalid-warning {
+    background-color: orange;
+    display: flex;
+    align-items: center;
+    padding: 0.25em 0.5em;
+    margin: 0.25em;
+}
+
+#MapFilter div.map-filter-invalid-warning > div {
+    margin-left: 0.25em;
+}
+
+#MapFilter table.map-filter-entry-fields {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#MapFilter table.map-filter-entry-fields td:first-child {
+    white-space: nowrap;
+}
+
+#MapFilter table.map-filter-entry-fields td:last-child {
+    width: 99%;
+}
+
+#MapFilter table.map-filter-entry-fields td:last-child > * {
+    width: 100%;
+}
+
+#MapFilter div.map-filter-add-custom {
+    margin: 0 0.25em 0.25em 0.25em;
+}
+
+#MapFilter div.map-filter-custom-entry-titlebar {
+    display: flex;
+}
+
+#MapFilter div.map-filter-custom-entry-titlebar > div.TextInput {
+    flex: 1 1 auto;
+}
+
+#MapFilter div.map-filter-custom-entry-titlebar > div.ToggleSwitch {
+    margin: 0 0.5em;
+}
+
+#MapFilter div.map-filter-add-custom > button {
+    width: 100%;
+}
+
+#MapFilter input.map-filter-custom-entry-expr {
+    min-width: 0;
+    width: 100%;
+}
+
+#MapFilter div.map-filter-editor-container {
+    padding: 0.25em;
+}
+
+#MapFilter div.map-filter-editor {
+    height: 5em;
+}
+
+#MapFilter div.map-filter-editor-invalid {
+    background-color: rgba(255, 127, 127);
+}
+
+button.filter-map-button-error {
+    background-color: orange;
+
+}

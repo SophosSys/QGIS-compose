@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx
+    platform: linux/amd64
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - qgis-server-net
+    restart: always
+    depends_on:
+      - qgis-server
+    ports:
+      - "8080:80"
+
+  qgis-server:
+    build:
+      context: ./qgis-server
+      dockerfile: Dockerfile
+      args:
+        BASE_IMAGE: qgis/qgis-server:stable
+    platform: linux/amd64
+    environment:
+      SKIP_NGINX: "true"
+      QGIS_SERVER_LOG_STDERR: "1"
+      QGIS_SERVER_LOG_LEVEL: "0"
+      QGIS_PROJECT_FILE: /io/data/SEL-2.qgz
+    volumes:
+      - ./data:/io/data:ro
+      - ./plugins:/io/plugins
+      - ./fonts:/usr/share/fonts
+      - ./svg:/var/lib/qgis/.local/share/QGIS/QGIS3/profiles/default/svg
+      - ./conf/pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
+    networks:
+      - qgis-server-net
+    restart: always
+
+  qwc2-service:
+    image: sourcepole/qwc-map-viewer-demo:v2.0.5
+    platform: linux/amd64
+    environment:
+      # Where to find your QGIS Server WMS API:
+      REACT_APP_WMS_URL: "http://localhost:8080/qgisserver"
+    networks:
+      - qgis-server-net
+    ports:
+      - "9090:9090"
+    restart: always
+    depends_on:
+      - qgis-server
+
+  qwc2-ui:
+    image: nginx:stable
+    volumes:
+      - ./qwc2/prod:/usr/share/nginx/html:ro
+      - ./qwc2/nginx.conf:/etc/nginx/nginx.conf:ro   # see below
+    ports:
+      - "3000:80"
+    depends_on:
+      - qwc2-service
+    networks:
+      - qgis-server-net
+networks:
+  qgis-server-net:

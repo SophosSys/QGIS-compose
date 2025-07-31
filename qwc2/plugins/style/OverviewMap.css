@@ -1,0 +1,38 @@
+/* Make place for the overview map button */
+#BottomBar span.bottombar-links {
+    margin-right: 3em;
+}
+
+div.overview-map {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 103;
+}
+
+div.overview-map > button {
+    font-size: initial!important;
+    right: 0.25em;
+    bottom: 0.25em;
+    position: absolute;
+    color: var(--map-button-text-color)!important;
+    background-color: var(--map-button-bg-color)!important;
+    border: 0!important;
+    outline: 0;
+    border-radius: 2px;
+}
+
+div.overview-map > div.ol-overviewmap-map {
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+}
+
+div.overview-map.ol-collapsed > div.ol-overviewmap-map {
+    display: none;
+}

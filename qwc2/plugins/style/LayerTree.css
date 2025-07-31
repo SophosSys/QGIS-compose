@@ -1,0 +1,361 @@
+#LayerTree span.layertree-visibility-button {
+    padding: 0.25em 1em 0.25em 0.25em;
+    position: relative;
+    display: inline-flex;
+    align-items: start;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#LayerTree span.layertree-visibility-button:hover,
+#LayerTree span.layertree-visibility-button-active {
+    color: var(--titlebar-bg-color);
+    background-color: var(--titlebar-text-color);
+}
+
+#LayerTree span.layertree-visibility-button > span.icon-chevron-down {
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    font-size: 80%;
+}
+
+#LayerTree div.layertree-visibility-menu {
+    z-index: 1;
+    position: absolute;
+    top: 100%;
+    border: 1px solid var(--border-color);
+    background-color: var(--list-bg-color);
+    color: var(--text-color);
+    cursor: default;
+}
+
+#LayerTree div.layertree-visibility-menu > div {
+    white-space: nowrap;
+    padding: 0.25em 1em 0.25em 0.5em;
+    display: flex;
+    align-items: start;
+}
+
+#LayerTree div.layertree-visibility-menu > div:hover {
+    background-color: var(--list-item-bg-color-hover);
+    color: var(--list-item-text-color-hover);
+}
+
+#LayerTree div.layertree-visibility-menu > div > span.icon {
+    margin-right: 0.5em;
+}
+
+#LayerTree div.layertree-visibility-menu-sep:not(:first-child) {
+    border-top: 1px solid var(--border-color);
+}
+
+#LayerTree span.layertree-print-legend,
+#LayerTree span.layertree-visible-filter,
+#LayerTree span.layertree-delete-legend,
+#LayerTree span.layertree-theme-metadata {
+    margin-left: 0.5em;
+    padding: 0.25em;
+}
+
+#LayerTree span.layertree-print-legend:hover,
+#LayerTree span.layertree-visible-filter:hover,
+#LayerTree span.layertree-delete-legend:hover,
+#LayerTree span.layertree-theme-metadata:hover {
+    background-color: var(--titlebar-text-color);
+    color: var(--titlebar-bg-color);
+}
+
+#LayerTree span.layertree-visible-filter-active {
+    background-color: var(--titlebar-text-color);
+    color: var(--titlebar-bg-color);
+}
+
+/* https://github.com/philipwalton/flexbugs/issues/216 */
+#LayerTree div.layertree-container-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+#LayerTree div.layertree-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* titlebar: 2.5em */
+    max-height: calc(100vh - 2.5em - var(--topbar-height) - var(--bottombar-height)); /* viewport - sidebar_titlebar - topbar - bottombar*/
+    max-height: calc(var(--vh, 1vh) * 100 - 2.5em - var(--topbar-height) - var(--bottombar-height)); /* viewport - sidebar_titlebar - topbar - bottombar*/
+}
+
+#LayerTree div.layertree-tree {
+    min-height: 5em;
+    flex: 0 1 auto;
+    overflow-y: auto;
+    margin-right: 0.25em;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#LayerTree div.layertree-tree .drop-ghost {
+    outline: 1px solid var(--color-active);
+    background-color: var(--list-bg-color);
+    color: var(--text-color);
+}
+
+#LayerTree div.layertree-option {
+    flex: 0 0 auto;
+    height: 2.25em;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+#LayerTree div.layertree-option > span.icon {
+    margin-right: 0.5em;
+}
+
+#LayerTree div.layertree-option > span {
+    cursor: pointer;
+}
+
+#LayerTree div.layertree-item-container {
+    margin-left: 0.5em;
+}
+
+#LayerTree div.layertree-item {
+    display: flex;
+    align-items: center;
+    height: 1.75em;
+}
+
+#LayerTree div.layertree-item-disabled > span.layertree-item-title {
+    color: var(--text-color-disabled);
+}
+
+#LayerTree div.layertree-item-outsidescalerange > span.layertree-item-title {
+    font-style: italic;
+    color: var(--text-color-disabled);
+}
+
+#LayerTree div.layertree-item-separator {
+    font-weight: bold;
+    border-bottom: 1px solid var(--color-active);
+}
+
+#LayerTree div.layertree-item-separator > input {
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    font-weight: bold;
+}
+
+#LayerTree div.layertree-item-separator > input:focus {
+    background-color: var(--input-bg-color);
+}
+
+#LayerTree span.layertree-item-expander {
+    margin-right: 0.25em;
+    flex: 0 0 1em;
+}
+
+#LayerTree div.layertree-item > div.spinner {
+    width: 1em;
+    height: 1em;
+    flex: 0 0 auto;
+    margin-right: 0.5em;
+}
+
+#LayerTree span.layertree-item-checkbox {
+    margin-right: 0.5em;
+    flex: 0 0 auto;
+}
+
+#LayerTree img.layertree-item-legend-thumbnail {
+    height: 1.5em;
+    width: auto;
+    max-width: 2em;
+    margin-right: 0.5em;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    flex: 0 0 auto;
+}
+
+#LayerTree span.layertree-item-legend-coloricon {
+    display: inline-block;
+    height: 1.5em;
+    width: 1.5em;
+    margin-right: 0.5em;
+    border: 1px solid var(--border-color);
+    flex: 0 0 auto;
+}
+
+img.layertree-item-legend-tooltip {
+    position: absolute;
+    z-index: 6;
+    box-shadow: 0px 2px 5px rgba(136, 136, 136, 0.5);
+    border-radius: 0.5em;
+    border: 1px solid var(--border-color);
+    margin-left: 1px;
+    padding: 0.25em;
+    background-color: white;
+}
+
+#LayerTree span.layertree-item-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 0 1 auto;
+    cursor: pointer;
+}
+
+#LayerTree div.layertree-item-noresults {
+    color: gray;
+    font-size: small;
+    font-style: italic;
+}
+
+#LayerTree span.layertree-item-queryable {
+    margin-left: 0.25em;
+    color: var(--border-color);
+    font-size: xx-small;
+    vertical-align: top;
+    flex: 0 0 auto;
+}
+
+#LayerTree span.layertree-item-identifyable {
+    margin-left: 0.25em;
+    font-size: small;
+    vertical-align: top;
+    flex: 0 0 auto;
+}
+
+#LayerTree span.layertree-item-identifyable-unchecked {
+    color: var(--border-color);
+}
+
+#LayerTree span.layertree-item-identifyable-checked {
+    color: var(--color-active);
+}
+
+#LayerTree span.layertree-item-identifyable-tristate {
+    color: var(--text-color);
+}
+
+#LayerTree span.layertree-item-spacer {
+    flex: 1 1 auto;
+}
+
+#LayerTree span.layertree-item-remove {
+    text-align: center;
+    width: 1.75em;
+    flex: 0 0 auto;
+}
+
+#LayerTree span.layertree-item-remove:hover {
+    color: red;
+}
+
+#LayerTree span.layertree-item-menubutton {
+    text-align: center;
+    width: 1.75em;
+    flex: 0 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#LayerTree span.layertree-item-menubutton-active {
+    background-color: var(--color-active);
+    color: white;
+}
+
+#LayerTree div.layertree-item-optionsmenu {
+    touch-action: none;
+    margin-left: 1em;
+    height: 1.75em;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg-color);
+}
+
+#LayerTree div.layertree-item-optionsmenu > span.icon {
+    flex: 0 0 auto;
+    width: 1.75em;
+    text-align: center;
+}
+
+#LayerTree input.layertree-item-transparency-slider {
+    flex: 1 1 auto;
+    font-size: small;
+    min-width: 0;
+    max-width: none;
+    width: 1000em; /* exagerated value */
+    margin: 0 0.25em;
+}
+
+#LayerTree div.layertree-item-stylemenu {
+    margin-left: 1em;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg-color);
+}
+
+#LayerTree div.layertree-item-stylemenu > div {
+    padding: 0.25em;
+    display: flex;
+    align-items: center;
+}
+
+#LayerTree div.layertree-item-stylemenu > div > span.icon {
+    margin-right: 0.25em;
+    cursor: pointer;
+}
+
+#LayerTree div.layertree-item-stylemenu > div > div {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+#LayerTree div.layertree-item-addsep {
+    border-top: 2px solid transparent;
+    border-bottom: 4px solid transparent;
+    margin-bottom: -6px;
+    position: relative;
+}
+
+#LayerTree div.layertree-item-addsep:hover {
+    border-top: 2px solid var(--color-active);
+}
+
+div.layertree-legend-print-body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+div.layertree-legend-print-body > iframe {
+    border: 0;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    flex: 1 1 auto;
+}
+
+div.layertree-legend-print-body-buttonbar {
+    border-top: 1px solid var(--border-color);
+    flex: 0 0 auto;
+    text-align: center;
+}
+
+div.layertree-legend-print-body-buttonbar > button {
+    margin: 0.5em;
+    padding: 0.5em;
+    background-color: var(--titlebar-bg-color);
+    color: white;
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+}

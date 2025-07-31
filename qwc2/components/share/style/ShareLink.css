@@ -1,0 +1,13 @@
+div.share-link-frame {
+    display: flex;
+}
+
+div.share-link-frame > input {
+    flex: 1 1 auto;
+}
+
+span.share-link-button {
+    flex: 0 0 auto;
+    height: 2.5em;
+    width: 2.5em;
+}

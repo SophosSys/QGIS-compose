@@ -1,0 +1,167 @@
+div.AppMenu {
+    text-align: right;
+    cursor: default;
+    transition: background-color 0.25s;
+    outline: none;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    height: 100%;
+    flex: 0 1 20em;
+}
+
+div.AppMenu.appmenu-nolabel {
+    flex: 0 0 auto;
+}
+
+div.AppMenu.appmenu-visible {
+    background-color: var(--app-submenu-bg-color-hover);
+    color: var(--app-submenu-text-color-hover);
+    overflow: visible;
+}
+
+div.AppMenu .appmenu-button {
+    display: flex;
+    align-items: center;
+}
+
+div.AppMenu .appmenu-label {
+    font-weight: bold;
+    transition: color 0.25s;
+    color: var(--app-menu-text-color);
+}
+
+div.AppMenu.appmenu-visible .appmenu-label {
+    color: var(--app-submenu-text-color-hover);
+}
+
+div.AppMenu .appmenu-icon > span.icon {
+    color: var(--app-menu-text-color);
+    padding: 0.25em;
+    margin: 0 1em;
+    border: 2px solid var(--app-menu-text-color);
+    transition: color 0.25s, border-color 0.25s, background-color 0.25s;
+}
+
+
+div.AppMenu.appmenu-visible .appmenu-icon > span.icon {
+    color: var(--app-submenu-text-color-hover);
+    border-color: var(--app-submenu-text-color-hover);
+    background-color: inherit;
+}
+
+div.AppMenu.appmenu-blocked {
+    cursor: not-allowed;
+}
+
+div.AppMenu div.appmenu-menu-container {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    box-shadow: 0px 2px 4px rgba(136, 136, 136, 0.5);
+    width: 20em;
+    max-width: 100vw;
+    opacity: 0;
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 0.25s, opacity 0.25s;
+    overflow-y: auto;
+    max-height: calc(100vh - var(--topbar-height) - var(--bottombar-height));
+    max-height: calc(var(--vh, 1vh) * 100 - var(--topbar-height) - var(--bottombar-height));
+}
+
+div.AppMenu.appmenu-compact div.appmenu-menu-container {
+    right: -11.25em;
+    width: 15em;
+    height: calc(100vh - 5.5em);
+    transition: transform 0.25s, opacity 0.25s, right 0.5s;
+    background: var(--app-menu-bg-color);
+    box-shadow: 0px 0px 4px rgba(136, 136, 136, 0.5);
+    top: 3.5em;
+}
+
+div.AppMenu.appmenu-compact div.appmenu-menu-container:hover {
+    right: 0;
+}
+
+div.AppMenu ul.appmenu-menu {
+    text-align: left;
+    padding: 0;
+    background-color: var(--app-menu-bg-color);
+}
+
+div.AppMenu.appmenu-visible div.appmenu-menu-container {
+    transform: scaleY(1);
+    opacity: 1;
+}
+
+div.AppMenu ul.appmenu-menu li {
+    color: var(--app-menu-text-color);
+    list-style-type: none;
+    margin: 0;
+    font-size: small;
+    font-weight: bold;
+}
+
+div.AppMenu ul.appmenu-menu li:not(:last-child) {
+    border-bottom: 1px solid var(--app-menu-text-color);
+}
+
+div.AppMenu ul.appmenu-menu > li.appmenu-leaf-active,
+div.AppMenu ul.appmenu-menu > li.appmenu-submenu-active,
+div.AppMenu ul.appmenu-menu > li.appmenu-submenu-expanded {
+    background-color: var(--app-menu-bg-color-hover);
+    color: var(--app-menu-text-color-hover);
+}
+
+div.AppMenu ul.appmenu-menu li > .icon {
+    vertical-align: middle;
+    width: 2em;
+    margin: 0.5em 1em 0.5em 1em;
+}
+
+div.AppMenu ul.appmenu-menu li.appmenu-submenu > ul {
+    background-color: var(--app-submenu-bg-color);
+    padding: 0;
+    display: none;
+}
+
+div.AppMenu ul.appmenu-menu li.appmenu-submenu-expanded > ul {
+    display: block;
+}
+
+div.AppMenu ul.appmenu-menu li.appmenu-submenu > ul > li {
+    color: var(--app-submenu-text-color);
+}
+
+div.AppMenu ul.appmenu-menu li.appmenu-submenu > ul > li.appmenu-leaf-active,
+div.AppMenu ul.appmenu-menu li.appmenu-submenu > ul > li.appmenu-submenu-active,
+div.AppMenu ul.appmenu-menu li.appmenu-submenu > ul > li.appmenu-submenu-expanded {
+    background-color: var(--app-submenu-bg-color-hover);
+    color: var(--app-submenu-text-color-hover);
+}
+
+div.AppMenu ul.appmenu-menu li.appmenu-leaf {
+    display: flex;
+    align-items: center;
+}
+
+div.AppMenu ul.appmenu-menu li.appmenu-leaf > span.icon {
+    flex: 0 0 auto;
+}
+
+div.AppMenu ul.appmenu-menu li.appmenu-leaf > span.appmenu-leaf-label {
+    flex: 1 1 auto;
+    margin: 0.25em 0;
+}
+
+div.AppMenu ul.appmenu-menu li.appmenu-leaf div.appmenu-leaf-comment {
+    font-weight: normal;
+    font-size: 90%;
+}
+
+div.appmenu-filter {
+    width: 100%;
+    margin-right: 0.5em;
+}

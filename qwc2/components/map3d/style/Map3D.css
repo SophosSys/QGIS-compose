@@ -1,0 +1,57 @@
+div.map3d-titlebar {
+    flex: 0 0 3.25em;
+    display: flex;
+    align-items: center;
+}
+
+div.map3d-titlebar > span:first-child {
+    flex: 1 1 auto;
+    padding: 0 0.5em;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+div.map3d-titlebar > span.icon-remove {
+    font-size: 150%;
+    margin: 0 0.5em;
+}
+
+div.map3d-map {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(-1 * var(--topbar-height));
+    bottom: calc(-1 * var(--bottombar-height));
+}
+
+div.map3d-inspector {
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    top: var(--topbar-height);
+    max-height: calc(100% - var(--topbar-height) - var(--bottombar-height));
+    overflow-y: auto;
+}
+
+div.map3d-inspector input {
+    color: black!important;
+}
+
+span.map3d-object-label {
+    background-color: rgba(41, 120, 180, 0.75);
+    border: 1px solid white;
+    color: white;
+    font-weight: bold;
+    padding: 0.25em 0.5em;
+    border-radius: 8px;
+}
+
+span.map3d-search-label {
+    background-color: rgba(41, 120, 180, 0.75);
+    border: 1px solid white;
+    color: white;
+    font-weight: bold;
+    padding: 0.25em 0.5em;
+    border-radius: 8px;
+    margin-top: -3em;
+}

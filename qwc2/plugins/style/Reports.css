@@ -1,0 +1,15 @@
+div.reports-body {
+    padding: 0.25em;
+}
+
+div.reports-body > div:not(:last-child) {
+    margin-bottom: 0.25em;
+}
+
+div.reports-body div.reports-filter-combo {
+    width: 100%;
+}
+
+div.reports-body button.reports-download-button {
+    width: 100%;
+}

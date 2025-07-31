@@ -1,0 +1,7 @@
+div.theme-switcher-filter {
+    flex: 100 1 auto;
+    max-width: 15em;
+    font-weight: normal;
+    color: var(--text-color);
+    margin: 0 0.5em;
+}

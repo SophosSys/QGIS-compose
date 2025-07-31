@@ -1,0 +1,145 @@
+#LayerTree3D div.layertree3d-layers {
+    padding-right: 0.25em;
+}
+
+#LayerTree3D div.layertree3d-section {
+    padding: 0.25em 0 0 0.25em;
+}
+
+#LayerTree3D div.layertree3d-item-container {
+    padding-left: 0.5em;
+}
+
+#LayerTree3D div.layertree3d-item {
+    display: flex;
+    align-items: center;
+    height: 1.75em;
+    margin-left: 0.25em;
+}
+
+#LayerTree3D span.layertree3d-item-checkbox {
+    margin-right: 0.5em;
+    flex: 0 0 auto;
+}
+
+#LayerTree3D div.layertree3d-item-disabled > span.layertree3d-item-title {
+    color: var(--text-color-disabled);
+}
+
+#LayerTree3D span.layertree3d-item-title {
+    flex: 1 1 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#LayerTree3D span.layertree3d-item-transparency {
+    flex: 0 0 5em;
+    margin: 0 0.5em;
+}
+
+#LayerTree3D input.layertree3d-item-transparency-slider {
+    width: 100%;
+}
+
+#LayerTree3D div.layertree3d-section {
+    font-weight: bold;
+    margin-left: 0.25em;
+}
+
+#LayerTree3D span.layertree3d-item-remove {
+    text-align: center;
+    width: 1.75em;
+    flex: 0 0 auto;
+}
+
+#LayerTree3D span.layertree3d-item-remove:not(.icon_disabled):hover {
+    color: red;
+}
+
+#LayerTree3D span.layertree3d-item-menubutton {
+    text-align: center;
+    width: 1.75em;
+    flex: 0 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#LayerTree3D span.layertree3d-item-menubutton-active {
+    background-color: var(--color-active);
+    color: white;
+}
+
+#LayerTree3D div.layertree3d-item-stylemenu {
+    margin-left: 1em;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg-color);
+}
+
+#LayerTree3D div.layertree3d-item-stylemenu > div {
+    padding: 0.25em;
+    display: flex;
+    align-items: center;
+}
+
+#LayerTree3D div.layertree3d-item-stylemenu > div > span.icon {
+    margin-right: 0.25em;
+    cursor: pointer;
+}
+
+#LayerTree3D div.layertree3d-item-stylemenu > div > div {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#LayerTree3D div.layertree3d-item-optionsmenu {
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg-color);
+}
+
+#LayerTree3D div.layertree3d-item-optionsmenu-row {
+    padding: 0.25em;
+    display: flex;
+    align-items: center;
+}
+
+#LayerTree3D div.layertree3d-item-optionsmenu-row > span.icon {
+    flex: 0 0 auto;
+    width: 1.25em;
+    margin-right: 0.25em;
+}
+
+#LayerTree3D input.layertree3d-item-transparency-slider {
+    flex: 1 1 auto;
+    font-size: small;
+    min-width: 0;
+    max-width: none;
+    width: 1000em; /* exagerated value */
+    margin: 0 0.25em;
+    height: 1.25em;
+}
+
+#LayerTree3D div.layertree3d-item-optionsmenu-row > div.number-input {
+    flex: 1 1 auto;
+    margin-left: 0.25em;
+}
+
+#LayerTree3D div.layertree3d-option {
+    flex: 0 0 auto;
+    height: 2.25em;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+#LayerTree3D div.layertree3d-option > span.icon {
+    margin-right: 0.5em;
+}
+
+#LayerTree3D div.layertree3d-option > span {
+    cursor: pointer;
+}

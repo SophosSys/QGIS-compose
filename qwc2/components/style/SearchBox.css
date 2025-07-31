@@ -1,0 +1,158 @@
+div.SearchBox {
+    position: relative;
+    display: flex;
+    height: 2em;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+}
+
+div.searchbox-field {
+    flex: 1 1 auto;
+}
+
+button.searchbox-filter-button {
+    flex: 0 0 auto;
+    border-left-width: 0;
+    padding: 0 0.25em 0 0.5em;
+}
+
+button.searchbox-filter-button > span.icon:last-child {
+    font-size: 75%;
+    margin-top: 1em;
+}
+
+div.searchbox-field > div.spinner {
+    width: calc(2em - 2px);
+    height: calc(2em - 2px);
+}
+
+div.searchbox-results {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    max-height: calc(100vh - var(--topbar-height) - var(--bottombar-height));
+    max-height: calc(var(--vh, 1vh) * 100 - var(--topbar-height) - var(--bottombar-height));
+    background-color: var(--list-bg-color);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0px 2px 4px rgba(136, 136, 136, 0.5);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+div.searchbox-results-section-title {
+    background-color: var(--list-section-bg-color);
+    color: var(--list-section-text-color);
+    font-weight: bold;
+    padding: 0.5em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+div.searchbox-results-section-title > span.icon {
+    margin-right: 0.5em;
+}
+
+div.searchbox-result {
+    padding: 0.125em 0.25em;
+    display: flex;
+    align-items: center;
+}
+
+div.searchbox-noresults {
+    padding: 0.125em 0.5em;
+    font-style: italic;
+    color: var(--text-color-disabled);
+}
+
+div.searchbox-result:hover {
+    background-color: var(--list-item-bg-color-hover);
+    color: var(--list-item-text-color-hover);
+}
+
+div.searchbox-result-expandedinfo {
+    background-color: var(--list-item-bg-color-hover);
+    color: var(--list-item-text-color-hover);
+}
+
+div.searchbox-result > span.icon {
+    flex: 0 0 1.5em;
+}
+
+.searchbox-result-thumbnail {
+    flex: 0 0 1.5em;
+    height: 1.5em;
+}
+
+span.searchbox-result-openicon {
+    font-size: 75%;
+    color: var(--text-color-disabled);
+}
+
+span.searchbox-result-label {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0.25em;
+    white-space: nowrap;
+}
+
+div.searchbox-result-abstract {
+    padding: .5em;
+    border-bottom: 1px solid var(--list-item-bg-color-hover);
+    max-height: 10em;
+    overflow-y: auto;
+    font-size: 95%;
+}
+
+div.searchbox-more-results {
+    color: grey;
+    font-style: italic;
+    padding: 0 0.5em;
+    height: 1.75em;
+    display: flex;
+    align-items: center;
+}
+
+div.searchbox-result-group {
+    margin-left: 1em;
+    border-left: 1px solid var(--list-item-bg-color-hover);
+}
+
+div.searchbox-filter-options {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    min-width: 100%;
+    background-color: var(--container-bg-color);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0px 2px 4px rgba(136, 136, 136, 0.5);
+}
+
+div.searchbox-filter-options > table {
+    width: 100%;
+}
+
+div.searchbox-filter-options > table td {
+    padding: 0.25em;
+    white-space: nowrap;
+}
+
+div.searchbox-filter-options > table td:last-child {
+    width: 99%;
+}
+
+div.searchbox-filter-options > table td:last-child > div.combobox {
+    width: 100%;
+    height: 2em;
+}
+
+div.searchbox-filter-options-geometry > div.combobox {
+    flex: 1 1 auto;
+    height: 2em;
+}

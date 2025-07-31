@@ -1,0 +1,227 @@
+div.qt-designer-form {
+    overflow: auto;
+    margin-bottom: 0.25em;
+}
+
+div.qt-designer-form textarea {
+    height: 100%;
+}
+
+div.qt-designer-form div.text-input-wrapper-multiline,
+div.qt-designer-form div.text-input-wrapper-multiline > pre {
+    height: 100%;
+}
+
+div.qt-designer-form label > input {
+    margin-right: 0.25em;
+}
+
+div.qt-designer-layout-grid {
+    display: grid;
+    grid-column-gap: 6px;
+    grid-row-gap: 6px;
+    height: 100%;
+}
+
+div.qt-designer-layout-grid > div {
+    display: flex;
+    align-items: center;
+}
+
+div.qt-designer-layout-grid > div > *:not(.qt-designer-form-vline) {
+    width: 100%;
+}
+
+div.qt-designer-layout-vbox {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+div.qt-designer-layout-hbox {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+div.qt-designer-layout-hbox > div,
+div.qt-designer-layout-vbox > div {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+}
+
+div.qt-designer-form-hline {
+    border-bottom: 1px solid var(--border-color);
+}
+
+div.qt-designer-form-vline {
+    border-right: 1px solid var(--border-color);
+    height: 100%;
+}
+
+div.qt-designer-form-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+div.qt-designer-form-frame-title {
+    font-weight: bold;
+    flex: 0 0 auto;
+}
+
+div.qt-designer-form-frame {
+    padding: 0.25em;
+    flex: 1 1 auto;
+    width: 100%;
+    border: 1px solid var(--border-color);
+}
+
+div.qt-designer-form-tabbar {
+    margin-bottom: -1px;
+}
+
+div.qt-designer-widget-relation {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+div.qt-designer-widget-relation-resize-handle {
+    touch-action: none;
+    position: absolute;
+    right: -0.25em;
+    bottom: -0.25em;
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid var(--border-color);
+    border-left: 10px solid transparent;
+    z-index: 1;
+    cursor: ns-resize;
+}
+
+div.qt-designer-widget-relation-table-container {
+    overflow-y: auto;
+    flex: 1 1 auto;
+    height: 4.5em;
+    position: relative;
+}
+
+div.qt-designer-widget-relation-table-loading {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(200, 200, 200, 0.9);
+    z-index: 2;
+}
+
+div.qt-designer-widget-relation-table-loading > div.spinner {
+    width: 4em;
+    height: 4em;
+}
+
+div.qt-designer-widget-relation-table-container > table {
+    width: 100%;
+    border: 1px solid var(--border-color);
+}
+
+div.qt-designer-widget-relation-table-container > table td {
+    padding: 0.25em 0.125em;
+    text-align: center;
+}
+
+div.qt-designer-widget-relation-table-container > table td.qt-designer-widget-relation-record-icon {
+    width: 1px;
+}
+div.qt-designer-widget-relation-table-container > table td.qt-designer-widget-relation-row-widget > * {
+    width: 100%;
+}
+
+div.qt-designer-widget-relation-table-container > table td > label {
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+}
+
+div.qt-designer-widget-relation-table-container > table th {
+    background-color: var(--border-color);
+    color: white;
+}
+
+div.qt-designer-widget-relation-table-container > table tr:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+tr.qt-designer-widget-relation-record-deleted {
+    background-color: rgb(255,127,127);
+}
+
+div.qt-designer-widget-relation-buttons {
+    flex: 0 0 auto;
+}
+
+button.qt-designer-widget-relation-add {
+    width: 100%;
+}
+
+div.qt-designer-form label {
+    display: flex;
+    align-items: center;
+}
+
+div.qt-designer-form-featurelink-buttons {
+    display: flex;
+}
+
+div.qt-designer-form-featurelink-buttons > div.ButtonBar {
+    flex: 1 1 auto;
+}
+
+div.qt-designer-form-featurelink-buttons > button.button {
+    margin: 0.25em 0;
+}
+
+div.qt-designer-report {
+    background-color: white;
+}
+
+div.qt-designer-report input,
+div.qt-designer-report textarea,
+div.qt-designer-report select {
+    border: none!important;
+    outline: none!important;
+}
+
+div.qt-designer-report select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+div.qt-designer-form-textarea {
+    padding: 0.25em;
+    white-space: pre-wrap;
+}
+
+div.qt-designer-form-image img {
+    width: 100%;
+    max-width: 400px;
+}
+
+div.qt-designer-form-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.qt-designer-form-loading > div.spinner {
+    width: 4em;
+    height: 4em;
+    margin-right: 1em;
+}

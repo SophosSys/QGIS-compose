@@ -1,0 +1,47 @@
+div.EditableSelect {
+    position: relative;
+}
+
+div.editable-select-inputcontainer {
+    width: 100%;    
+}
+
+div.editable-select-inputcontainer > span.icon-clear {
+    width: 1.5em;
+}
+
+div.editable-select-dropdown {
+    border: 1px solid var(--border-color);
+    max-height: 8em;
+    overflow-y: auto;
+    background-color: var(--input-bg-color);
+}
+
+div.editable-select-dropdown > div {
+    padding: 0.25em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div.editable-select-dropdown > div:hover {
+    background-color: var(--list-item-bg-color-hover);
+    color: var(--list-item-text-color-hover);
+}
+
+div.editable-select-selopt {
+    position: absolute;
+    left: 1px;
+    right: 1.5em;
+    top: 1px;
+    bottom: 1px;
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    padding: 0 0.25em;
+    background-color: var(--input-bg-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

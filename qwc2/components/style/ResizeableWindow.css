@@ -1,0 +1,178 @@
+div.resizeable-window-container {
+    position: absolute;
+    pointer-events: none;
+}
+
+div.resizeable-window {
+    pointer-events: auto;
+    background-color: var(--container-bg-color);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.75);
+    z-index: 8;
+}
+
+div.resizeable-window-portal-container,
+div.resizeable-window-portal-container > div {
+    height: 100%;
+}
+
+div.resizeable-window-contents {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+div.resizeable-window-maximized {
+    transform: none!important;
+    left: 0!important;
+    right: 0!important;
+    top: 0!important;
+    bottom: 0!important;
+    width: initial!important;
+    height: initial!important;
+}
+
+div.resizeable-window-minimized {
+    height: 2.5em!important;
+    min-height: 2.5em!important;
+}
+
+div.resizeable-window-docked-left {
+    transform: none!important;
+    left: 0!important;
+    right: initial!important;
+    top: 0!important;
+    bottom: initial!important;
+}
+
+div.resizeable-window-docked-right {
+    transform: none!important;
+    left: initial!important;
+    right: 0!important;
+    top: 0!important;
+    bottom: initial!important;
+}
+
+div.resizeable-window-split-left {
+    transform: none!important;
+    left: 0!important;
+    right: initial!important;
+    top: 0!important;
+    bottom: 0!important;
+    height: initial!important;
+    max-height: initial!important;
+}
+
+div.resizeable-window-split-right {
+    transform: none!important;
+    left: initial!important;
+    right: 0!important;
+    top: 0!important;
+    bottom: 0!important;
+    height: initial!important;
+    max-height: initial!important;
+}
+
+div.resizeable-window-docked-top {
+    transform: none!important;
+    left: 0!important;
+    right: 0!important;
+    top: 0!important;
+    bottom: initial!important;
+    width: initial!important;
+    max-width: initial!important;
+}
+
+div.resizeable-window-docked-bottom {
+    transform: none!important;
+    left: 0!important;
+    right: 0!important;
+    top: initial!important;
+    bottom: 0!important;
+    width: initial!important;
+    max-width: initial!important;
+}
+
+div.resizeable-window-fit-height {
+    height: initial!important;
+}
+
+div.resizeable-window-titlebar {
+    color: var(--titlebar-text-color);
+    background-color: var(--titlebar-bg-color);
+    flex: 0 0 2.5em;
+    display: flex;
+    align-items: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 0 0.25em;
+}
+
+div.resizeable-window-titlebar > div.spinner {
+    flex: 0 0 auto;
+    margin-right: 0.25em;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+div.resizeable-window-titlebar > div.spinner > div {
+    background-color: var(--titlebar-text-color);
+}
+
+span.resizeable-window-titlebar-icon {
+    flex: 0 0 auto;
+    margin-right: 0.25em;
+}
+
+span.resizeable-window-titlebar-title {
+    font-weight: bold;
+    flex: 1 1 auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+span.resizeable-window-titlebar-control {
+    flex: 0 0 auto;
+    margin-left: 0.25em;
+    font-size: large;
+}
+
+span.resizeable-window-titlebar-extra-control {
+    flex: 0 0 auto;
+    margin-right: 0.25em;
+    font-size: large;
+}
+
+span.resizeable-window-titlebar-extra-control-active {
+    background-color: var(--titlebar-text-color);
+    color: var(--titlebar-bg-color);
+}
+
+div.resizeable-window-body {
+    padding: 0.25em;
+    overflow: hidden;
+    flex: 1 1 auto;
+    cursor: default;
+    flex: 1 1 auto;
+    position: relative;
+}
+
+div.dock-window > div.resizeable-window-body {
+    margin: 0.25em;
+}
+
+div.resizeable-window-body-scrollable {
+    overflow-y: auto;
+}
+
+div.resizeable-window-drag-shield {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: none;
+    z-index: 1;
+}

@@ -1,0 +1,123 @@
+div.menubutton {
+    display: inline-flex;
+    align-items: center;
+    height: 2em;
+}
+
+div.menubutton-button {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: 1px solid var(--border-color);
+}
+
+div.menubutton-disabled div.menubutton-button {
+    color: var(--text-color-disabled);
+}
+
+div.menubutton:not(.menubutton-disabled) div.menubutton-button:active > span.menubutton-button-content,
+div.menubutton:not(.menubutton-disabled) div.menubutton-button:active > span.menubotton-button-arrow {
+    position: relative!important;
+    left: 1px;
+    top: 1px;
+}
+
+div.menubutton:not(.menubutton-disabled)  div.menubutton-button:hover,
+div.menubutton:not(.menubutton-disabled) div.menubutton-button-hover {
+    background-color: var(--button-bg-color-hover);
+    color: var(--button-text-color-hover);
+}
+
+div.menubutton-button-active {
+    background-color: var(--button-bg-color-active);
+    color: var(--button-text-color-active);
+}
+
+div.menubutton:not(.menubutton-disabled) div.menubutton-button-active:hover,
+div.menubutton:not(.menubutton-disabled) div.menubutton-button-active.menubutton-button-hover {
+    background-color: var(--button-bg-color-active-hover);
+    color: var(--button-text-color-active-hover);
+}
+
+span.menubutton-button-content {
+    padding: 0 0.5em;
+    flex: 1 1 auto;
+    display: inline-block;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+div.menubutton span.menubotton-button-arrow {
+    height: 80%;
+    display: flex;
+    align-items: flex-end;
+    font-size: 80%;
+    padding: 0 0.2em;
+}
+
+div.menubutton-togglebutton span.menubotton-button-arrow {
+    border-left: 1px solid var(--border-color);
+}
+
+div.menubutton-menu {
+    background-color: var(--list-bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    box-shadow: 0px 2px 4px rgba(136, 136, 136, 0.5);
+}
+
+div.menubutton-menu > div {
+    padding: 0.25em;
+}
+
+div.menubutton-menu > div:hover {
+    background-color: var(--list-item-bg-color-hover);
+    color: var(--list-item-text-color-hover);
+}
+
+div.menubutton-menu > div.menubutton-menu-active {
+    background-color: var(--list-item-bg-color-active);
+    color: var(--list-item-text-color-active);
+}
+
+div.menubutton-menu > div.menubutton-menu-active:hover {
+    background-color: var(--list-item-bg-color-active-hover);
+    color: var(--list-item-text-color-active-hover);
+}
+
+div.menubutton-menu-disabled {
+    color: var(--text-color-disabled);
+}
+
+span.menubutton-tooltip {
+    position: absolute;
+    display: none;
+    background-color: var(--tooltip-bg-color);
+    border: 1px solid var(--tooltip-border-color);
+    color: var(--tooltip-text-color);
+    font-size: 75%;
+    font-weight: normal;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+span.menubutton-tooltip-top {
+    bottom: 110%;
+}
+
+span.menubutton-tooltip-bottom {
+    top: 110%;
+}
+
+div.menubutton:hover span.menubutton-tooltip {
+    display: inline;
+}

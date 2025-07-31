@@ -1,0 +1,249 @@
+div.identify-body {
+    background-color: var(--container-bg-color);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+div.dock-window > div.resizeable-window-body > div.identify-body {
+    /* titlebar: 2.5em, padding: 0.5em */
+    max-height: calc(100vh - 2.5em - 0.5em - var(--topbar-height) - var(--bottombar-height)); /* viewport - titlebar - window_padding - topbar - bottombar*/
+    max-height: calc(var(--vh, 1vh) * 100 - 2.5em - 0.5em - var(--topbar-height) - var(--bottombar-height)); /* viewport - titlebar - window_padding - topbar - bottombar*/
+}
+
+span.identify-body-message {
+    padding: 0.25em;
+}
+
+div.identify-body div.identify-results-container {
+    overflow-y: auto;
+    flex: 1 1 50%;
+    min-height: 0;
+    background-color: var(--list-bg-color);
+    border: 1px solid var(--border-color);
+    padding: 0.25em;
+    margin-bottom: 0.25em;
+    font-size: small;
+}
+
+div.identify-layer-expandable {
+    position: relative;
+    margin-left: 1em;
+}
+
+div.identify-layer-expandable > div.identify-layer-entries {
+    display: none;
+}
+
+div.identify-layer-expanded > div.identify-layer-entries {
+    display: block;
+}
+
+div.identify-layer-expandable:before {
+    content: "";
+    border-color: transparent var(--text-color);
+    border-width: 0.35em 0 0.35em 0.45em;
+    border-style: solid;
+    display: block;
+    height: 0;
+    width: 0;
+    left: -1em;
+    top: 0.3em;
+    position: absolute;
+}
+
+div.identify-layer-expanded:before {
+    border-color: var(--text-color) transparent;
+    border-width: 0.45em 0.35em 0 0.35em;
+    top: 0.4em;
+}
+
+div.identify-layer-entries {
+    padding: 0.25em 0.25em 0.25em 1em;
+}
+
+div.identify-result-entry {
+    display: flex;
+}
+
+div.identify-result-entry span.clickable {
+    cursor: pointer;
+}
+
+div.identify-result-entry span.active {
+    font-weight: bold;
+}
+
+div.identify-result-entry > span:first-child {
+    flex: 1 1 auto;
+}
+
+div.identify-result-entry span.identify-remove-result,
+div.identify-result-entry span.identify-export-result {
+    margin: 0 0.25em;
+    color: var(--border-color);
+    cursor: pointer;
+    visibility: hidden;
+    font-size: large;
+    flex: 0 0 auto;
+}
+
+div.identify-result-entry:hover > span.identify-remove-result,
+div.identify-result-entry:hover > span.identify-export-result {
+    visibility: visible;
+}
+
+div.identify-body div.identify-flat-results-list {
+    overflow: auto;
+    flex: 1 1 auto;
+}
+
+div.identify-body .identify-result-tree-frame {
+    flex: 1 1 50%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+}
+
+div.identify-body .identify-result-frame-normal {
+    margin-top: 0.25em;
+    border: 1px solid var(--border-color);
+}
+
+div.identify-body .identify-result-frame-highlighted {
+    margin-top: 0.25em;
+    border: 1px solid var(--color-active);
+}
+
+div.identify-body .identify-result-title {
+    background-color: var(--list-section-bg-color);
+    padding: 0.25em;
+    font-weight: bold;
+    flex: 0 0 auto;
+    font-size: small;
+    display: flex;
+    align-items: center;
+}
+
+div.identify-body .identify-result-title > span:not(.icon) {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div.identify-body .identify-result-title > span.icon {
+    flex: 0 0 auto;
+}
+
+div.identify-body .identify-result-title > span:not(:first-child) {
+    margin-left: 0.5em;
+}
+
+div.identify-body .identify-result-title > span.icon:hover {
+    color: var(--text-color-hover);
+}
+
+div.identify-body .identify-result-tree-frame > div.identify-result-container {
+    overflow-y: auto;
+}
+
+div.identify-body .identify-result-box {
+    border: 0;
+    background-color: var(--list-bg-color);
+    font-size: small;
+    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    overflow: auto;
+}
+
+div.identify-body table.attribute-list {
+    width: 100%;
+    table-layout: fixed;
+}
+
+div.identify-body table.attribute-list > tbody > tr:nth-child(even) {
+    background-color: var(--list-item-bg-color-even);
+}
+
+div.identify-body table.attribute-list td {
+    overflow: hidden;
+    vertical-align: top;
+    text-overflow: ellipsis;
+}
+
+div.identify-body table.attribute-list td:first-child {
+    padding-left: 0.25em;
+}
+
+div.identify-body table.attribute-list td:last-child {
+    padding-right: 0.25em;
+}
+
+div.identify-body table.attribute-list td.ellipsis {
+    white-space: nowrap;
+}
+
+div.identify-body td.identify-attr-title {
+    min-width: 10ch;
+    width: 40%;
+    padding-right: 1em;
+}
+
+div.identify-body td.identify-attr-value {
+    width: 60%;
+}
+
+div.identify-body td.identify-attr-value > a > img {
+    max-width: 100%;
+}
+
+div.identify-body div.identify-buttonbox {
+    margin-top: 0.5em;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+div.identify-body div.identify-selectbox {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+select:focus {
+outline: none;
+}
+
+div.identify-body table.identify-attr-subtable {
+    width: 100%;
+}
+
+div.identify-body table.identify-attr-subtable > tbody > tr:nth-child(even) {
+    background-color: #F0F0F0;
+}
+
+div.identify-body td.identify-attr-spacer {
+    height: 2px;
+    background-color: var(--list-section-bg-color);
+}
+
+span.identify-buttonbox-spacer {
+    flex: 1 1 auto;
+}
+
+div.identify-body div.identify-result-feature-report-frame {
+    padding: 0.25em 0.5em;
+    font-size: small;
+    display: flex;
+    align-items: center;
+}
+
+div.identify-body div.identify-result-feature-report-frame > div.spinner {
+    width: 1em;
+    height: 1em;
+    margin-left: 0.5em;
+}
