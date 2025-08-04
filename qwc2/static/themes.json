@@ -4,7 +4,7 @@
     "subdirs": [],
     "items": [
       {
-        "url": "http://qwc2.sourcepole.ch/ows/qwc_demo",
+        "url": "http://localhost:${QWC2_SERVICE_PORT:-9090}/ows/qwc_demo",
         "id": "qwc_demo",
         "name": "qwc_demo",
         "title": "QWC Demo Theme",
@@ -15,7 +15,7 @@
         },
         "abstract": "This a demo project for the QGIS Web Client",
         "keywords": "qwc, demo",
-        "onlineResource": "http://qwc2.sourcepole.ch/ows/qwc_demo",
+        "onlineResource": "http://localhost:${QWC2_SERVICE_PORT:-9090}/ows/qwc_demo",
         "contact": {
           "person": "unknown",
           "organization": "Sourcepole AG",
@@ -292,9 +292,9 @@
           "edit_lines",
           "edit_points"
         ],
-        "legendUrl": "http://qwc2.sourcepole.ch/api/v1/legend/qwc_demo?LAYERTITLE=FALSE",
-        "featureInfoUrl": "http://qwc2.sourcepole.ch/api/v1/featureinfo/qwc_demo?",
-        "printUrl": "http://qwc2.sourcepole.ch/ows/qwc_demo?",
+        "legendUrl": "http://localhost:${QWC2_SERVICE_PORT:-9090}/api/v1/legend/qwc_demo?LAYERTITLE=FALSE",
+        "featureInfoUrl": "http://localhost:${QWC2_SERVICE_PORT:-9090}/api/v1/featureinfo/qwc_demo?",
+        "printUrl": "http://localhost:${QWC2_SERVICE_PORT:-9090}/ows/qwc_demo?",
         "predefinedFilters": [
           {
             "id": "continent_filter",

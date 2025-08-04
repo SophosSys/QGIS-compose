@@ -37,7 +37,7 @@ module.exports = (env, argv) => {
             ],
             compress: true,
             hot: true,
-            port: 8080
+            port: process.env.QWC2_DEV_PORT || 8081
         },
         resolve: {
             extensions: [".mjs", ".js", ".jsx"],
