@@ -41,7 +41,7 @@ services:
     platform: linux/amd64
     environment:
       # Where to find your QGIS Server WMS API:
-      REACT_APP_WMS_URL: "http://localhost:8080/qgisserver"
+      REACT_APP_WMS_URL: "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}"
     networks:
       - qgis-server-net
     ports:
@@ -49,6 +49,7 @@ services:
     restart: always
     depends_on:
       - qgis-server
+      - themes-init
 
   qwc2-ui:
     image: nginx:stable
@@ -59,7 +60,27 @@ services:
       - "${API_PORT:-3000}:80"
     depends_on:
       - qwc2-service
+      - themes-init
     networks:
       - qgis-server-net
+  themes-init:
+    image: node:18-alpine
+    working_dir: /app
+    volumes:
+      - ./qwc2:/app
+    environment:
+      - WMS_SERVER_URL=${WMS_SERVER_URL:-http://localhost:8080/qgisserver}
+    command: >
+      sh -c 'npm ci --omit=dev >/tmp/npm-ci.log && \
+             if echo "$WMS_SERVER_URL" | grep -q "?"; then sep="&"; else sep="?"; fi; \
+             cap="$WMS_SERVER_URL${sep}SERVICE=WMS&REQUEST=GetCapabilities"; \
+             node fetch-wms-themes.js "$cap" themes.json themesConfig.json themes.json themesConfig.json && \
+             cp themes.json static/themes.json && \
+             cp themesConfig.json static/themesConfig.json && \
+             (cp themes.json prod/themes.json 2>/dev/null || true) && \
+             (cp themesConfig.json prod/themesConfig.json 2>/dev/null || true)'
+    depends_on:
+      - qgis-server
+    restart: "no"
 networks:
   qgis-server-net:

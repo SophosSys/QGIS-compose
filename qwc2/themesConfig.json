@@ -60,12 +60,6 @@
     "coordinates"
   ],
   "defaultMapCrs": "EPSG:3857",
-  "defaultTheme": "SEL2",
-  "themes": [
-    {
-      "id": "SEL2",
-      "name": "SEL2",
-      "default": false
-    }
-  ]
+  "defaultTheme": "importedWMS",
+  "themes": []
 }
