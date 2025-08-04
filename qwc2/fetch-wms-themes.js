@@ -63,11 +63,12 @@ async function main() {
     const cfgArray = cfgData.themes;
 
     // Build theme entry
-    const themeKey = 'importedWMS';
+    const themeKey = process.env.THEME_NAME || 'SEL2';
+    const themeTitle = process.env.THEME_TITLE || themeKey;
     const themeEntry = {
       name: themeKey,
-      title: 'Imported WMS Service',
-      abstract: 'Layers from automated WMS import',
+      title: themeTitle,
+      abstract: `Layers from ${themeTitle}`,
       layers: layers.map(l => ({
         type: 'WMS',
         baseUrl: capUrl.replace(/\?.*$/, ''),
@@ -90,8 +91,9 @@ async function main() {
 
     // Merge into themesConfig.json: enable the new theme
     const cfgFiltered = cfgArray.filter(t => t.name !== themeKey);
-    cfgFiltered.push({ name: themeKey, default: false });
+    cfgFiltered.push({ name: themeKey, default: true });
     cfgData.themes = cfgFiltered;
+    cfgData.defaultTheme = themeKey;
 
     // Write outputs
     await fs.writeJson(outThemes, newThemesOutput, { spaces: 2 });
