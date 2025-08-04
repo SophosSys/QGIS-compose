@@ -7,7 +7,7 @@
       "layers": [
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Trasse",
           "title": "Trasse",
           "version": "1.3.0",
@@ -23,7 +23,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Blattschnitte",
           "title": "Blattschnitte",
           "version": "1.3.0",
@@ -39,7 +39,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Orte, SP",
           "title": "Orte, SP",
           "version": "1.3.0",
@@ -55,7 +55,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Bau- Einschraenkungen",
           "title": "Bau- Einschraenkungen",
           "version": "1.3.0",
@@ -71,7 +71,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Gemarkungen",
           "title": "Gemarkungen",
           "version": "1.3.0",
@@ -87,7 +87,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Status Wegerecht - KBB",
           "title": "Status Wegerecht - KBB",
           "version": "1.3.0",
@@ -103,7 +103,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "WMTS LGL-BW ALKIS Basis",
           "title": "WMTS LGL-BW ALKIS Basis",
           "version": "1.3.0",
@@ -119,7 +119,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Zufahrten",
           "title": "Zufahrten",
           "version": "1.3.0",
@@ -135,7 +135,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Oekologie",
           "title": "Oekologie",
           "version": "1.3.0",
@@ -151,7 +151,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Beweissicherung",
           "title": "Beweissicherung",
           "version": "1.3.0",
@@ -167,7 +167,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Kataster",
           "title": "Kataster",
           "version": "1.3.0",
@@ -183,7 +183,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Fremdleitungen",
           "title": "Fremdleitungen",
           "version": "1.3.0",
@@ -199,7 +199,7 @@
         },
         {
           "type": "WMS",
-          "baseUrl": "http://localhost:${WEB_SERVER_PORT:-8080}/",
+          "baseUrl": "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}",
           "layers": "Hintergrund",
           "title": "Hintergrund",
           "version": "1.3.0",
