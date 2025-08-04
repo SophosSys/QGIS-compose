@@ -41,7 +41,7 @@ services:
     platform: linux/amd64
     environment:
       # Where to find your QGIS Server WMS API:
-      REACT_APP_WMS_URL: "http://localhost:8080/qgisserver"
+      REACT_APP_WMS_URL: "${WMS_SERVER_URL:-http://localhost:8080/qgisserver}"
     networks:
       - qgis-server-net
     ports:
