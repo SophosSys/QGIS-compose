@@ -80,6 +80,7 @@ services:
              cp themesConfig.json static/themesConfig.json &&
              (cp themes.json prod/themes.json 2>/dev/null || true) &&
              (cp themesConfig.json prod/themesConfig.json 2>/dev/null || true)"
+
     depends_on:
       - qgis-server
     restart: "no"
