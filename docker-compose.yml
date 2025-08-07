@@ -12,7 +12,7 @@ services:
     depends_on:
       - qgis-server
     ports:
-      - "8080:80"
+      - "${NGINX_PORT}:80"
 
   qgis-server:
     build:
@@ -41,11 +41,11 @@ services:
     platform: linux/amd64
     environment:
       # Where to find your QGIS Server WMS API:
-      REACT_APP_WMS_URL: "http://localhost:8080/qgisserver"
+      REACT_APP_WMS_URL: ${QGIS_SERVER_URL}
     networks:
       - qgis-server-net
     ports:
-      - "9090:9090"
+      - "${QWC2_SERVICE_PORT}:9090"
     restart: always
     depends_on:
       - qgis-server
@@ -56,7 +56,7 @@ services:
       - ./qwc2/prod:/usr/share/nginx/html
       - ./qwc2/nginx.conf:/etc/nginx/nginx.conf   # see below
     ports:
-      - "3000:80"
+      - "${QWC2_UI_PORT}:80"
     depends_on:
       - qwc2-service
     networks:

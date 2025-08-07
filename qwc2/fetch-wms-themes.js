@@ -7,6 +7,7 @@
  * Usage:
  *   node fetch-wms-themes.js \
  *     <getCapabilitiesUrl> \
+ *     <themeName> \
  *     <themesTemplate.json> \
  *     <themesConfigTemplate.json> \
  *     <outputThemes.json> \
@@ -34,9 +35,9 @@ async function fetchLayers(url) {
 }
 
 async function main() {
-  const [,, capUrl, themesTplPath, themesCfgTplPath, outThemes, outCfg] = process.argv;
-  if (!capUrl || !themesTplPath || !themesCfgTplPath || !outThemes || !outCfg) {
-    console.error('Usage: node fetch-wms-themes.js <capUrl> <themesTpl> <themesCfgTpl> <outThemes> <outCfg>');
+  const [,, capUrl, themeKey, themesTplPath, themesCfgTplPath, outThemes, outCfg] = process.argv;
+  if (!capUrl || !themeKey || !themesTplPath || !themesCfgTplPath || !outThemes || !outCfg) {
+    console.error('Usage: node fetch-wms-themes.js <capUrl> <themeName> <themesTpl> <themesCfgTpl> <outThemes> <outCfg>');
     process.exit(1);
   }
 
@@ -63,11 +64,10 @@ async function main() {
     const cfgArray = cfgData.themes;
 
     // Build theme entry
-    const themeKey = 'importedWMS';
     const themeEntry = {
       name: themeKey,
-      title: 'Imported WMS Service',
-      abstract: 'Layers from automated WMS import',
+      title: themeKey,
+      abstract: `Layers from ${themeKey}`,
       layers: layers.map(l => ({
         type: 'WMS',
         baseUrl: capUrl.replace(/\?.*$/, ''),
@@ -89,7 +89,7 @@ async function main() {
     const newThemesOutput = themesIsArray ? themesArray : { ...themesData, themes: themesArray };
 
     // Merge into themesConfig.json: enable the new theme
-    const cfgFiltered = cfgArray.filter(t => t.name !== themeKey);
+    const cfgFiltered = cfgArray.filter(t => (t.name || t.id) !== themeKey);
     cfgFiltered.push({ name: themeKey, default: false });
     cfgData.themes = cfgFiltered;
 
