@@ -27,11 +27,11 @@ services:
       QGIS_SERVER_LOG_LEVEL: "0"
       QGIS_PROJECT_FILE: /io/data/SEL-2.qgz
     volumes:
-      - ./data:/io/data:ro
+      - ./data:/io/data
       - ./plugins:/io/plugins
       - ./fonts:/usr/share/fonts
       - ./svg:/var/lib/qgis/.local/share/QGIS/QGIS3/profiles/default/svg
-      - ./conf/pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
+      - ./conf/pg_service.conf:/etc/postgresql-common/pg_service.conf
     networks:
       - qgis-server-net
     restart: always
@@ -53,8 +53,8 @@ services:
   qwc2-ui:
     image: nginx:stable
     volumes:
-      - ./qwc2/prod:/usr/share/nginx/html:ro
-      - ./qwc2/nginx.conf:/etc/nginx/nginx.conf:ro   # see below
+      - ./qwc2/prod:/usr/share/nginx/html
+      - ./qwc2/nginx.conf:/etc/nginx/nginx.conf   # see below
     ports:
       - "3000:80"
     depends_on:
