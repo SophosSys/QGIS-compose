@@ -9,6 +9,9 @@ RUN sed -i \
   -e 's@XVFB_PID=$(waitfor /usr/bin/Xvfb)@XVFB_PID=$!@' \
   /usr/local/bin/start-xvfb-nginx.sh
 
+
+
+
 RUN chmod +x /usr/local/bin/start-xvfb-nginx.sh
 
 USER www-data

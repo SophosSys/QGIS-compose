@@ -4,8 +4,8 @@ set -e
 : "${QGIS_SERVER_URL?Need QGIS_SERVER_URL}"
 
 # Wait for QGIS server to be reachable
-until curl -fsS "${QGIS_SERVER_URL}?SERVICE=WMS&REQUEST=GetCapabilities" > /dev/null; do
-  echo "Waiting for QGIS server..."
+until curl -fsS "${QGIS_SERVER_URL}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities" > /dev/null; do
+  echo "Waiting for QGIS server... ${QGIS_SERVER_URL}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities"
   sleep 5
 done
 
