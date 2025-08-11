@@ -20,12 +20,15 @@ import LocaleUtils from './LocaleUtils';
 
 const ThemeUtils = {
     getThemeById(themes, id) {
-        for (let i = 0, n = themes.items.length; i < n; ++i) {
+        if (!themes) {
+            return null;
+        }
+        for (let i = 0, n = (themes.items || []).length; i < n; ++i) {
             if (themes.items[i].id === id) {
                 return themes.items[i];
             }
         }
-        for (let i = 0, n = themes.subdirs.length; i < n; ++i) {
+        for (let i = 0, n = (themes.subdirs || []).length; i < n; ++i) {
             const theme = this.getThemeById(themes.subdirs[i], id);
             if (theme) {
                 return theme;
