@@ -38,8 +38,8 @@ services:
     image: sourcepole/qwc-map-viewer-demo:v2.0.5
     platform: linux/amd64
     environment:
-      # Where to find your QGIS Server WMS API:
-      REACT_APP_WMS_URL: ${QGIS_SERVER_URL}
+      # WMS URL exposed to the browser
+      REACT_APP_WMS_URL: /qgisserver/
     networks:
       - qgis-server-net
     ports:
@@ -55,7 +55,10 @@ services:
       - ./qwc2/nginx.conf:/etc/nginx/nginx.conf   # see below
       - ./data:/io/data
     environment:
-      QGIS_SERVER_URL: ${QGIS_SERVER_URL}
+      # Internal URL for theme generation and health checks
+      QGIS_SERVER_URL: http://nginx/
+      # Public URL embedded into generated themes
+      QGIS_SERVER_PUBLIC_URL: /qgisserver/
     ports:
       - "${QWC2_UI_PORT}:80"
     depends_on:

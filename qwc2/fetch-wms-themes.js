@@ -45,6 +45,7 @@ async function main() {
     console.log(`Fetching GetCapabilities from ${capUrl}`);
     const layers = await fetchLayers(capUrl);
     console.log(`Found ${layers.length} layers.`);
+    const publicBase = process.env.QGIS_SERVER_PUBLIC_URL || capUrl.replace(/\?.*$/, '');
 
     // Load themes.json (could be array or object with 'themes')
     const themesData = await fs.readJson(themesTplPath);
@@ -70,7 +71,7 @@ async function main() {
       abstract: `Layers from ${themeKey}`,
       layers: layers.map(l => ({
         type: 'WMS',
-        baseUrl: capUrl.replace(/\?.*$/, ''),
+        baseUrl: publicBase,
         layers: l.name,
         title: l.title,
         version: '1.3.0',
