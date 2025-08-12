@@ -54,6 +54,7 @@ services:
       - ./qwc2/prod:/usr/share/nginx/html
       - ./qwc2/nginx.conf:/etc/nginx/nginx.conf   # see below
       - ${PROJECT_DIR}:/io/data
+      - ./config/ui.htpasswd:/etc/nginx/.htpasswd:ro
     environment:
       # Internal URL for theme generation and health checks
       QGIS_SERVER_URL: http://nginx/
