@@ -157,8 +157,9 @@ async function main() {
 
   try {
     console.log(`Fetching GetCapabilities from ${capUrl}`);
-    const sublayers = await fetchLayers(capUrl);
-    console.log(`Found ${sublayers.length} named layers.`);
+    const layers = await fetchLayers(capUrl);
+    console.log(`Found ${layers.length} layers.`);
+    const publicBase = process.env.QGIS_SERVER_PUBLIC_URL || capUrl.replace(/\?.*$/, '');
 
     // Load templates/outputs and normalize to QWC2 shape
     const themesSrc = (await fs.pathExists(outThemes)) ? outThemes : themesTplPath;
