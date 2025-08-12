@@ -9,8 +9,6 @@ services:
     restart: always
     depends_on:
       - qgis-server
-    ports:
-      - "${NGINX_PORT}:80"
 
   qgis-server:
     build:
@@ -42,8 +40,6 @@ services:
       REACT_APP_WMS_URL: /qgisserver/
     networks:
       - qgis-server-net
-    ports:
-      - "${QWC2_SERVICE_PORT}:9090"
     restart: always
     depends_on:
       - qgis-server
