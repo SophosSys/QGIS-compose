@@ -6,6 +6,7 @@ const { execFileSync } = require('child_process');
 const dataDir = process.env.QGIS_PROJECTS_DIR || '/io/data';
 const outputDir = process.env.QWC2_PROD_DIR || '/usr/share/nginx/html';
 const qgisUrl = process.env.QGIS_SERVER_URL || 'http://qgis-server:8080/qgisserver';
+const publicUrl = process.env.QGIS_SERVER_PUBLIC_URL || qgisUrl;
 
 const themesTpl = path.resolve(__dirname, '../themes.json');
 const themesCfgTpl = path.resolve(__dirname, '../themesConfig.json');
@@ -18,7 +19,10 @@ function buildThemes(files) {
     const mapPath = `/io/data/${file}`;
     const capUrl = `${qgisUrl}?MAP=${encodeURIComponent(mapPath)}&SERVICE=WMS&REQUEST=GetCapabilities`;
     try {
-      execFileSync('node', [path.resolve(__dirname, '../fetch-wms-themes.js'), capUrl, name, outThemes, outCfg, outThemes, outCfg], { stdio: 'inherit' });
+      execFileSync('node', [path.resolve(__dirname, '../fetch-wms-themes.js'), capUrl, name, outThemes, outCfg, outThemes, outCfg], {
+        stdio: 'inherit',
+        env: { ...process.env, QGIS_SERVER_PUBLIC_URL: publicUrl }
+      });
     } catch (err) {
       console.error(`Failed to build theme for ${name}: ${err.message}`);
     }
