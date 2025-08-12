@@ -62,6 +62,22 @@ function normalizeThemesShape(themesData) {
   };
 }
 
+function ensureOsmBackground(backgroundLayers = []) {
+  const exists = backgroundLayers.some(b => b.name === "mapnik");
+  if (!exists) {
+    backgroundLayers.push({
+      name: "mapnik",
+      title: "OpenStreetMap",
+      type: "osm",                 // built-in OSM tiles
+      attribution: "© OpenStreetMap contributors",
+      attributionUrl: "https://www.openstreetmap.org/copyright",
+      thumbnail: "img/mapthumbs/mapnik.jpg" // optional
+    });
+  }
+  return backgroundLayers;
+}
+
+
 async function fetchExtentAndBbox(capUrl) {
   const { data: xml } = await axios.get(capUrl);
   const parser = new xml2js.Parser({ explicitArray: false });
@@ -103,6 +119,8 @@ async function fetchExtentAndBbox(capUrl) {
 }
 
 function buildThemeEntry({ themeKey, wmsUrl, sublayers, extentInfo }) {
+
+
   const theme = {
     id: themeKey,
     name: themeKey,
@@ -149,7 +167,7 @@ function deriveWmsUrlFromCapabilities(capUrlStr) {
 }
 
 async function main() {
-  const [,, capUrl, themeKey, themesTplPath, themesCfgTplPath, outThemes, outCfg] = process.argv;
+  const [, , capUrl, themeKey, themesTplPath, themesCfgTplPath, outThemes, outCfg] = process.argv;
   if (!capUrl || !themeKey || !themesTplPath || !themesCfgTplPath || !outThemes || !outCfg) {
     console.error('Usage: node fetch-wms-themes.js <capUrl> <themeName> <themesTpl> <themesCfgTpl> <outThemes> <outCfg>');
     process.exit(1);
@@ -171,25 +189,36 @@ async function main() {
     const backgroundLayers = themesNorm.themes.backgroundLayers || [];
     const subdirs = themesNorm.themes.subdirs || [];
     let items = themesNorm.themes.items || [];
- 
+
     const extentInfo = await fetchExtentAndBbox(capUrl);
     const wmsUrl = deriveWmsUrlFromCapabilities(capUrl);
     const themeEntry = buildThemeEntry({ themeKey, wmsUrl, sublayers, extentInfo });
-    
+
     // Mark as default in themes.json as well
-    themeEntry.default = true; 
+    themeEntry.default = true;
 
     // Replace or append by id/name
     items = items.filter(t => (t.id || t.name) !== themeKey);
     items.push(themeEntry);
+
+
+    // 1) Ensure OSM exists in backgroundLayers
+    const backgroundLayersWithOSM = ensureOsmBackground(backgroundLayers);
+
+    // 2) Prefer OSM globally (viewer uses this when a theme doesn’t override)
+    const defaultBackgroundLayers = ["mapnik"];
+
+    // 3) Prefer OSM for this theme explicitly (shown by default)
+    themeEntry.backgroundLayers = [{ name: "mapnik", visibility: true }];
 
     // Save themes.json
     const themesOut = {
       themes: {
         items,
         subdirs,
-        backgroundLayers
-      }
+        backgroundLayers: backgroundLayersWithOSM
+      },
+      defaultBackgroundLayers // <- makes OSM the global default
     };
     await fs.writeJson(outThemes, themesOut, { spaces: 2 });
     console.log(`Wrote themes to ${outThemes}`);
