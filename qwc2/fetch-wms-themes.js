@@ -1,8 +1,7 @@
 /*
  * fetch-wms-themes.js
  *
- * Automates fetching WMS GetCapabilities, parsing layer definitions,
- * and merging them into QWC2 themes.json and themesConfig.json templates.
+ * Build QWC2-compatible themes.json (with themes.items[]) and themesConfig.json.
  *
  * Usage:
  *   node fetch-wms-themes.js \
@@ -12,26 +11,141 @@
  *     <themesConfigTemplate.json> \
  *     <outputThemes.json> \
  *     <outputThemesConfig.json>
- *
- * Dependencies:
- *   npm install axios xml2js fs-extra
  */
 
 const axios = require('axios');
 const xml2js = require('xml2js');
 const fs = require('fs-extra');
+const { URL } = require('url');
 
-async function fetchLayers(url) {
-  const { data: xml } = await axios.get(url);
+async function fetchLayers(capUrl) {
+  const { data: xml } = await axios.get(capUrl);
   const parser = new xml2js.Parser({ explicitArray: false });
   const result = await parser.parseStringPromise(xml);
-  const top = result.WMS_Capabilities.Capability.Layer;
-  const layers = Array.isArray(top.Layer) ? top.Layer : [top.Layer];
-  return layers.map(l => ({
-    name: l.Name,
-    title: l.Title || l.Name,
-    crs: Array.isArray(l.CRS) ? l.CRS : [l.CRS]
-  }));
+
+  // WMS 1.3.0: WMS_Capabilities > Capability > Layer > Layer[]
+  const top = result?.WMS_Capabilities?.Capability?.Layer;
+  if (!top) return [];
+  const layers = Array.isArray(top.Layer) ? top.Layer : (top.Layer ? [top.Layer] : []);
+  return layers
+    .filter(l => !!l?.Name) // only actual named layers
+    .map(l => ({
+      name: l.Name,
+      title: l.Title || l.Name
+    }));
+}
+
+function normalizeThemesShape(themesData) {
+  // Goal shape:
+  // { themes: { items: [], subdirs: [], backgroundLayers: [] } }
+  let items = [];
+  let subdirs = [];
+  let backgroundLayers = [];
+
+  if (Array.isArray(themesData)) {
+    items = themesData;
+  } else if (themesData && Array.isArray(themesData.themes)) {
+    items = themesData.themes;
+  } else if (themesData && themesData.themes) {
+    const t = themesData.themes;
+    items = Array.isArray(t.items) ? t.items : (Array.isArray(t) ? t : []);
+    subdirs = Array.isArray(t.subdirs) ? t.subdirs : [];
+    backgroundLayers = Array.isArray(t.backgroundLayers) ? t.backgroundLayers : [];
+  }
+
+  return {
+    themes: {
+      items,
+      subdirs,
+      backgroundLayers
+    }
+  };
+}
+
+async function fetchExtentAndBbox(capUrl) {
+  const { data: xml } = await axios.get(capUrl);
+  const parser = new xml2js.Parser({ explicitArray: false });
+  const cap = await parser.parseStringPromise(xml);
+  const top = cap?.WMS_Capabilities?.Capability?.Layer;
+  if (!top) return null;
+
+  // Try WMS BoundingBox (project CRS if advertised)
+  const bbs = top.BoundingBox ? (Array.isArray(top.BoundingBox) ? top.BoundingBox : [top.BoundingBox]) : [];
+  for (const bb of bbs) {
+    const a = bb?.$ || {};
+    const crs = a.CRS || a.SRS || null;
+    const minx = parseFloat(a.minx), miny = parseFloat(a.miny), maxx = parseFloat(a.maxx), maxy = parseFloat(a.maxy);
+    if ([minx, miny, maxx, maxy].every(Number.isFinite)) {
+      return {
+        mapCrs: crs || undefined,
+        extent: [minx, miny, maxx, maxy],
+        bbox: crs ? { crs, bounds: [minx, miny, maxx, maxy] } : undefined
+      };
+    }
+  }
+
+  // Fallback: EX_GeographicBoundingBox (EPSG:4326)
+  const ex = top.EX_GeographicBoundingBox;
+  if (ex) {
+    const west = parseFloat(ex.westBoundLongitude);
+    const east = parseFloat(ex.eastBoundLongitude);
+    const south = parseFloat(ex.southBoundLatitude);
+    const north = parseFloat(ex.northBoundLatitude);
+    if ([west, south, east, north].every(Number.isFinite)) {
+      return {
+        mapCrs: "EPSG:4326",
+        extent: [west, south, east, north],
+        bbox: { crs: "EPSG:4326", bounds: [west, south, east, north] }
+      };
+    }
+  }
+  return null;
+}
+
+function buildThemeEntry({ themeKey, wmsUrl, sublayers, extentInfo }) {
+  const theme = {
+    id: themeKey,
+    name: themeKey,
+    title: themeKey,
+    abstract: `Layers from ${themeKey}`,
+    url: wmsUrl,
+    version: '1.3.0',
+    format: 'image/png',
+    transparent: true,
+    tiled: false,
+    sublayers: sublayers.map((l, idx) => ({
+      name: l.name,
+      title: l.title,
+      visibility: idx === 0
+    }))
+  };
+
+  if (extentInfo?.extent?.length === 4) {
+    theme.extent = extentInfo.extent;                // <- REQUIRED by computeZoom
+    if (extentInfo.mapCrs) theme.mapCrs = extentInfo.mapCrs;
+    const [minx, miny, maxx, maxy] = extentInfo.extent;
+    theme.center = [(minx + maxx) / 2, (miny + maxy) / 2];  // <- avoid 'center' undefined
+    if (extentInfo.bbox) theme.initialBbox = extentInfo.bbox;      // <- QWC2-style bbox object
+  }
+
+  return theme;
+}
+
+
+
+
+function deriveWmsUrlFromCapabilities(capUrlStr) {
+  // Keep the endpoint and the MAP parameter only
+  const u = new URL(capUrlStr);
+  const base = `${u.origin}${u.pathname}`;
+  const map = u.searchParams.get('MAP');
+  if (map) {
+    const out = new URL(base);
+    out.searchParams.set('MAP', map);
+    return out.toString();
+  }
+  // If no MAP given, return bare endpoint; QWC2 will add WMS params as needed
+  return base;
 }
 
 async function main() {
@@ -43,62 +157,52 @@ async function main() {
 
   try {
     console.log(`Fetching GetCapabilities from ${capUrl}`);
-    const layers = await fetchLayers(capUrl);
-    console.log(`Found ${layers.length} layers.`);
+    const sublayers = await fetchLayers(capUrl);
+    console.log(`Found ${sublayers.length} named layers.`);
 
-    // Load themes.json (could be array or object with 'themes')
-    const themesData = await fs.readJson(themesTplPath);
-    let themesArray;
-    let themesIsArray = false;
-    if (Array.isArray(themesData)) {
-      themesArray = themesData;
-      themesIsArray = true;
-    } else {
-      themesData.themes = Array.isArray(themesData.themes) ? themesData.themes : [];
-      themesArray = themesData.themes;
-    }
+    // Load templates/outputs and normalize to QWC2 shape
+    const themesSrc = (await fs.pathExists(outThemes)) ? outThemes : themesTplPath;
+    const cfgSrc = (await fs.pathExists(outCfg)) ? outCfg : themesCfgTplPath;
 
-    // Load themesConfig.json
-    const cfgData = await fs.readJson(themesCfgTplPath);
-    cfgData.themes = Array.isArray(cfgData.themes) ? cfgData.themes : [];
-    const cfgArray = cfgData.themes;
+    const themesDataRaw = await fs.readJson(themesSrc);
+    const cfgDataRaw = await fs.readJson(cfgSrc);
 
-    // Build theme entry
-    const themeEntry = {
-      name: themeKey,
-      title: themeKey,
-      abstract: `Layers from ${themeKey}`,
-      layers: layers.map(l => ({
-        type: 'WMS',
-        baseUrl: capUrl.replace(/\?.*$/, ''),
-        layers: l.name,
-        title: l.title,
-        version: '1.3.0',
-        format: 'image/png',
-        transparent: true,
-        styles: '',
-        crs: l.crs
-      }))
+    const themesNorm = normalizeThemesShape(themesDataRaw);
+    const backgroundLayers = themesNorm.themes.backgroundLayers || [];
+    const subdirs = themesNorm.themes.subdirs || [];
+    let items = themesNorm.themes.items || [];
+ 
+    const extentInfo = await fetchExtentAndBbox(capUrl);
+    const wmsUrl = deriveWmsUrlFromCapabilities(capUrl);
+    const themeEntry = buildThemeEntry({ themeKey, wmsUrl, sublayers, extentInfo });
+    
+    // Mark as default in themes.json as well
+    themeEntry.default = true; 
+
+    // Replace or append by id/name
+    items = items.filter(t => (t.id || t.name) !== themeKey);
+    items.push(themeEntry);
+
+    // Save themes.json
+    const themesOut = {
+      themes: {
+        items,
+        subdirs,
+        backgroundLayers
+      }
     };
-
-    // Remove any existing entry
-    themesArray = themesArray.filter(t => t.name !== themeKey);
-    themesArray.push(themeEntry);
-
-    // Update themesData structure
-    const newThemesOutput = themesIsArray ? themesArray : { ...themesData, themes: themesArray };
-
-    // Merge into themesConfig.json: enable the new theme
-    const cfgFiltered = cfgArray.filter(t => (t.name || t.id) !== themeKey);
-    cfgFiltered.push({ name: themeKey, default: false });
-    cfgData.themes = cfgFiltered;
-
-    // Write outputs
-    await fs.writeJson(outThemes, newThemesOutput, { spaces: 2 });
+    await fs.writeJson(outThemes, themesOut, { spaces: 2 });
     console.log(`Wrote themes to ${outThemes}`);
-    await fs.writeJson(outCfg, cfgData, { spaces: 2 });
-    console.log(`Wrote themesConfig to ${outCfg}`);
 
+    // Merge into themesConfig.json
+    const cfg = { ...cfgDataRaw };
+    const cfgThemes = Array.isArray(cfg.themes) ? cfg.themes : [];
+    const cfgFiltered = cfgThemes.filter(t => (t.id || t.name) !== themeKey);
+    cfgFiltered.push({ id: themeKey, name: themeKey, default: true });
+    cfg.themes = cfgFiltered;
+
+    await fs.writeJson(outCfg, cfg, { spaces: 2 });
+    console.log(`Wrote themesConfig to ${outCfg}`);
   } catch (err) {
     console.error('Error:', err.message);
     process.exit(1);

@@ -10,8 +10,8 @@ COPY themes.json ./themes.json
 COPY themesConfig.json ./themesConfig.json
 COPY scripts/generateThemes.js ./scripts/generateThemes.js
 COPY scripts/startup.sh /startup.sh
-
+RUN sed -i 's/\r$//' /startup.sh && chmod +x /startup.sh
 RUN npm init -y >/dev/null 2>&1 && npm install axios xml2js fs-extra >/dev/null 2>&1 \
     && chmod +x /startup.sh
-
+ 
 CMD ["/startup.sh"]

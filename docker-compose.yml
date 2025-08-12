@@ -25,7 +25,7 @@ services:
       QGIS_SERVER_LOG_LEVEL: "0"
       QGIS_PROJECT_FILE: /io/data/SEL-2.qgz
     volumes:
-      - ./data:/io/data
+      - ${PROJECT_DIR}:/io/data
       - ./plugins:/io/plugins
       - ./fonts:/usr/share/fonts
       - ./svg:/var/lib/qgis/.local/share/QGIS/QGIS3/profiles/default/svg
@@ -53,7 +53,7 @@ services:
     volumes:
       - ./qwc2/prod:/usr/share/nginx/html
       - ./qwc2/nginx.conf:/etc/nginx/nginx.conf   # see below
-      - ./data:/io/data
+      - ${PROJECT_DIR}:/io/data
     environment:
       QGIS_SERVER_URL: ${QGIS_SERVER_URL}
     ports:
