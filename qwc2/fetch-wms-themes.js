@@ -108,7 +108,7 @@ function buildThemeEntry({ themeKey, wmsUrl, sublayers, extentInfo }) {
     name: themeKey,
     title: themeKey,
     abstract: `Layers from ${themeKey}`,
-    url: wmsUrl,
+    url: process.env.QGIS_SERVER_PUBLIC_URL || wmsUrl,
     version: '1.3.0',
     format: 'image/png',
     transparent: true,
